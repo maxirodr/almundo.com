@@ -160,7 +160,51 @@
 	
 	<section class="search">
 		<div class="container">
+			<div class="row breadcum">
+				Home / 
+				<a href="#">Hoteles</a> / 
+				madrid
+			</div>
 			
+			<div class="row description">
+				
+			</div>
+			
+			<div class="row order-select">select opt full right</div>
+			
+			<div class="row body">
+				<div class="col-md-2">
+					filtros
+				</div>
+				
+				<div class="col-md-10">
+					
+					<div class="col-sm-12">
+						<div class="col-sm-4 img">
+							<img src="" />
+							<div id="over-text">text centrado</div>
+						</div>
+						
+						<div class="col-sm-4 description">
+							son 4 rows:
+							title, stars, "cama | solo habitación", 6 iconos
+						</div>
+						
+						<div class="col-sm-4 price">
+							Precio por noche por habitación<br>
+							
+							<span id="precio"><span id="smaller">ARS</span>$1.000</span>
+							
+							impuestos y tasas no incluidos
+							<a href="#" id="btn">Ver hotel</a>
+							
+							<span id="add-txt">Pagá en cuotas</span>
+							<span id="add-txt">Pagá en destino</span>
+						</div>
+					</div>
+					
+				</div>
+			</div>
 		</div>
 	</section>
 
@@ -169,21 +213,21 @@
 			<div class="row">
 				<div class="col-md-12 social-icons">
 
-					<a href="https://www.facebook.com/TarjetealoAr" target="_blank">
+					<a href="#" target="_blank">
 						<span class="fa-stack fa-lg">
 							<i class="fa fa-circle fa-stack-2x"></i>
 							<i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
 						</span>
 					</a>
 
-					<a href="https://www.twitter.com/infoTarjetealo" target="_blank">
+					<a href="#" target="_blank">
 						<span class="fa-stack fa-lg">
 							<i class="fa fa-circle fa-stack-2x"></i>
 							<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
 						</span>
 					</a>
 
-					<a href="https://www.instagram.com/Tarjetealo" target="_blank">
+					<a href="#" target="_blank">
 						<span class="fa-stack fa-lg">
 							<i class="fa fa-circle fa-stack-2x"></i>
 							<i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
@@ -255,7 +299,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<ul>
-						<li>Copyright © Tarjetealo</li>
+						<li>Copyright © almundo</li>
 						<li><a href="#">Términos y condiciones</a></li>
 						<li><a href="#">Políticas de privacidad</a></li>
 					</ul>
