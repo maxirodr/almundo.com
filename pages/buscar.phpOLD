@@ -1,0 +1,333 @@
+<?php
+//si esta el query, redireccionar correctamente con rewrite content y que se haga directamente acá, una vez que está redireccionado, ahí, recién ahí, le hago rewrite
+
+if($_GET['query']) {
+	$search_string = mysqli_real_escape_string($dbConn, $_GET['query']);
+	
+	$search_words = explode(" ",$search_string);
+	
+	if(in_array($search_words, array("mascota,cachorro,perro,perra,cachorra,animal,gato"))) {
+		//activar solamente el view de mascotas
+		$has_superp=NULL;
+		$has_premium=NULL;
+		$has_totales=true;
+		$has_related=NULL;
+		$has_banners=NULL;
+		
+		$query="SELECT imagenes,adicionales FROM `articulos_mascotas` WHERE categories='activo'";
+	}//in array mascotas
+	
+	
+} else {
+	//handle de error? redirecciono a la home por el momento?
+	$has_superp=true;
+	$has_premium=true;
+	$has_totales=true;
+	$has_related=true;
+	$has_banners=true;
+}
+?>
+
+<section class="site search" data-site="search" style="margin-bottom: 0px">
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<?php if(isset($has_related)) { ?>
+				<div class="related-search wb">
+					Busquedas relacionadas <a href="#">remera,</a> <a href="#">chomba,</a> <a href="#">pantalón,</a> <a href="#">camisa</a>
+				</div>
+				<?php } ?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="big-title">Resultados encontrados</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="row filters">
+					<div class="col-sm-6">
+						<span class="filter">Filtrar</span>
+						<span class="categories selected">Categorías</span>
+					</div>
+					<div class="col-sm-6 icons">
+						<span class="rows"><i class="fa fa-list" aria-hidden="true"></i></span>
+						<span class="cols selected"><i class="fa fa-th" aria-hidden="true"></i></span>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="border-bot"></div>
+			</div>
+		</div>
+
+		<div class="row filter_categories">
+			<div class="col-sm-12">
+				<div class="hug_all">
+					<ul>
+						<li><input type="radio" name="cat" id="cat1" checked><label for="cat1"> Indumentaria</label></li>
+						<li><input type="radio" name="cat" id="cat2"><label for="cat2"> Electrónica</label></li>
+						<li><input type="radio" name="cat" id="cat3"><label for="cat3"> Casa y jardín</label></li>
+						<li><input type="radio" name="cat" id="cat4"><label for="cat4"> Vehículos</label></li>
+						<li><input type="radio" name="cat" id="cat5"><label for="cat5"> Deportes</label></li>
+						<li><input type="radio" name="cat" id="cat6"><label for="cat6"> Coleccionismo</label></li>
+						<li><input type="radio" name="cat" id="cat7"><label for="cat7"> Ocio</label></li>
+						<li><input type="radio" name="cat" id="cat8"><label for="cat8"> Servicios</label></li>
+						<li><input type="radio" name="cat" id="cat9"><label for="cat9"> Mascotas</label></li>
+					</ul>
+					<div style="clear:both"></div>
+				</div>
+			</div>
+			<div class="col-sm-12"><a name="resultados" />
+				<div class="hug_all">
+					<ul>
+						<li><label for="sub1"><input type="checkbox" id="sub1" checked><label for="sub1"> Mujer</label></li>
+						<li><label for="sub2"><input type="checkbox" id="sub2"><label for="sub2"> Hombre</label></li>
+						<li><label for="sub3"><input type="checkbox" id="sub3"><label for="sub3"> Niño</label></li>
+					</ul>
+					<div style="clear:both"></div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="hug_all">
+					<ul>
+						<li><input type="checkbox" id="subsub1" checked><label for="subsub1"> Jean</label></li>
+						<li><input type="checkbox" id="subsub2"><label for="subsub2"> Remera</label></li>
+						<li><input type="checkbox" id="subsub3"><label for="subsub3"> Calzado</label></li>
+					</ul>
+					<div style="clear:both"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row filter_filters" style="display: none">
+			<div class="col-md-2 col-sm-3">
+
+				<div class="icon_filter">
+					<div class="icon">
+						<i class="fa fa-minus" aria-hidden="true"></i>
+						<i class="fa fa-usd" aria-hidden="true"></i>
+					</div>
+					<div class="i-text">
+						Menor precio
+					</div>
+				</div>
+
+			</div>
+			<div class="col-md-2 col-sm-3">
+				
+				<div class="icon_filter">
+					<div class="icon">
+						<i class="fa fa-plus" aria-hidden="true"></i>
+						<i class="fa fa-usd" aria-hidden="true"></i>
+					</div>
+					<div class="i-text">
+						Mayor precio
+					</div>
+				</div>
+
+			</div>
+			<div class="col-md-2 col-sm-3">
+					
+				<div class="icon_filter selected">
+					<div class="icon">
+						<i class="fa fa-star" aria-hidden="true"></i>
+					</div>
+					<div class="i-text">
+						Calificaciones
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<?php if(isset($has_superp)) { ?>
+				<div class="featured">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="section-titl small">Nombre o Logo de la tienda recomendada.</div>
+							<p class="section-descp">Perfil recomendado por Tarjetealo.</p>
+							<div class="repu11">
+								<div class="repu11_ti">Reputación</div>
+								<span class="perc">95%</span> ventas concretadas
+								<div class="repu11_fill">
+									<div class="fill" style="width: 95%"></div>
+								</div>
+								<div class="repu11_sells">
+									<span class="f">4567 ventas</span> en Tarjetealo
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-9">
+
+							<div id="highlight-items" class="carousel slide highlight carousel-search" data-ride="carousel">									
+								<div class="carousel-inner" role="listbox">
+									<div class="item smaller active">
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<span class="hidden-sm">
+											<?=generate_mini_box(3, '', 0, "slider");?>
+											<?=generate_mini_box(3, '', 0, "slider");?>
+										</span>
+									</div>
+									<div class="item smaller">
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<span class="hidden-sm">
+											<?=generate_mini_box(3, '', 0, "slider");?>
+											<?=generate_mini_box(3, '', 0, "slider");?>
+										</span>
+									</div>
+									<div class="item smaller">
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<span class="hidden-sm">
+											<?=generate_mini_box(3, '', 0, "slider");?>
+											<?=generate_mini_box(3, '', 0, "slider");?>
+										</span>
+									</div>
+									<div class="item smaller">
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<?=generate_mini_box(3, '', 0, "slider");?>
+										<span class="hidden-sm">
+											<?=generate_mini_box(3, '', 0, "slider");?>
+											<?=generate_mini_box(3, '', 0, "slider");?>
+										</span>
+									</div>
+								</div>
+
+								<!-- Controls -->
+								<a class="left carousel-control" href="#highlight-items" role="button" data-slide="prev">
+									<i class="fa fa-caret-left" aria-hidden="true"></i>
+									<span class="sr-only">Previous</span>
+								</a>
+								<a class="right carousel-control" href="#highlight-items" role="button" data-slide="next">
+									<i class="fa fa-caret-right" aria-hidden="true"></i>
+									<span class="sr-only">Next</span>
+								</a>
+
+								<ol class="carousel-indicators">
+									<li data-target="#highlight-items" data-slide-to="0" class="active"></li>
+									<li data-target="#highlight-items" data-slide-to="1"></li>
+									<li data-target="#highlight-items" data-slide-to="2"></li>
+									<li data-target="#highlight-items" data-slide-to="3"></li>
+								</ol>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<?php }//hassuperp ?>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<?php if(isset($has_premium)) { ?>
+				<div class="results">
+					<div class="all">
+						<div class="row">
+							<div class="col-sm-12">
+								
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2 col-sm-4">
+								<div class="section-titl small">Artículos recomendados</div>
+								<p class="section-descp">Mirá primero las mejores publicaciones de Tarjetealo.</p>
+							</div>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+						</div>
+					</div>
+				</div>
+				<?php } ?>
+			</div>
+		</div>
+		
+		
+
+		<div class="row">
+			<?php if(isset($has_banners)) { ?>
+			<div class="container-fluid np">
+				<div class="row nm">
+					<div class="col-sm-3 e-np">
+						<img src="http://placehold.it/480x480/ffa726/8c6429?text=1:1" class="img-responsive">
+					</div>
+					
+					<div class="col-sm-3 e-np">
+						<img src="http://placehold.it/480x480/ffa726/8c6429?text=1:1" class="img-responsive">
+					</div>
+					
+					<div class="col-sm-3 e-np">
+						<img src="http://placehold.it/480x480/ffa726/8c6429?text=1:1" class="img-responsive">
+					</div>
+					
+					<div class="col-sm-3 e-np">
+						<img src="http://placehold.it/480x480/ffa726/8c6429?text=1:1" class="img-responsive">
+					</div>
+				</div>
+			</div>
+			<?php } ?>
+			
+			<div class="col-md-12">
+				<?php if(isset($has_totales)) { ?>
+				<div class="results">
+					<div class="all">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="section-titl brds">Todas las publicaciones</div>
+							</div>
+						</div>
+						<div class="row">
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+							<?php echo generate_mini_box(2, '', 0); ?>
+						</div>
+					</div>
+				</div>
+				<?php } ?>
+			</div>
+		</div>
+
+	</div>
+	
+</section>
