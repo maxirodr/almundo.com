@@ -1,0 +1,25 @@
+angular.module('Hotels', []).controller('hoteles', function($scope) {
+    $scope.names = [
+        {
+        	name:'Hotel Emperador',
+        	stars:'3',
+        	details:'solo habitación',
+        	icons:'', //aca irían iconos, pero no voy a hacer la f(x) para adaptar esto... no time
+        	price:'1596'
+        },
+        {
+        	name:'Petit Palace San Bernardo',
+        	stars:'4',
+        	details:'<i class="fa fa-bed" aria-hidden="true"></i> | solo habitación',
+        	icons:'<i class="fa fa-wifi" aria-hidden="true"></i> <i class="fa fa-thumbs-up" aria-hidden="true"></i> <i class="fa fa-television" aria-hidden="true"></i> <i class="fa fa-umbrella" aria-hidden="true"></i> <i class="fa fa-wheelchair" aria-hidden="true"></i> <i class="fa fa-bed" aria-hidden="true"></i>',
+        	price:'2145'
+        },
+        {
+        	name:'Hotel Nuevo Boston',
+        	stars:'2',
+        	details:'<i class="fa fa-bed" aria-hidden="true"></i> | solo habitación',
+        	icons:'<i class="fa fa-wifi" aria-hidden="true"></i> <i class="fa fa-thumbs-up" aria-hidden="true"></i> <i class="fa fa-bed" aria-hidden="true"></i>',
+        	price:'861'
+        },
+    ];
+}); 

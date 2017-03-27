@@ -29,9 +29,7 @@
 				<div class="row">
 					<div class="col-xs-4">
 						<a href="full" class="logo-header">
-							<!-- <img src="img/toldo.png" style="max-width:30px;max-height:30px;" onerror="this.onerror=null; this.src='toldo.png'">
-							<img src="img/logo.svg" style="max-width:90%;" onerror="this.onerror=null; this.src='logo.png'">!-->
-							<img src="img/logo_av.png">
+							<img src="img/logo-almundo.svg">
 						</a>
 					</div>
 					
@@ -159,46 +157,82 @@
 	<div class="header-space"></div>
 	
 	<section class="search">
-		<div class="container">
+		<div class="container" ng-app="Hotels" ng-controller="hoteles">
 			<div class="row breadcum">
 				Home / 
 				<a href="#">Hoteles</a> / 
 				madrid
 			</div>
 			
-			<div class="row description">
+			<div class="row description hidden-xs hidden-sm">
+				<span>Hoteles disponibles para:</span>
 				
+				<ul>
+					<li><i class="fa fa-map-marker" aria-hidden="true"></i> location</li>
+					<li><i class="fa fa-calendar-check-o" aria-hidden="true"></i> date-in</li>
+					<li><i class="fa fa-calendar-minus-o" aria-hidden="true"></i> date-out</li>
+					
+					<li><i class="fa fa-user" aria-hidden="true"></i> number of visitors</li>
+					
+					<li><a href="#">Modificar búsqueda</a></li>
+				</ul>
 			</div>
 			
-			<div class="row order-select">select opt full right</div>
+			<div class="row order-select">
+				Ordenar
+				<select>
+					<option disabled="disabled" selected="selected" hidden="hidden">Seleccionar</option>
+					<option ng-click="orderByMe('name')">Nombres</option>
+					<option ng-click="orderByMe('price')">Precios</option>
+				</select>
+			</div>
 			
 			<div class="row body">
-				<div class="col-md-2">
-					filtros
+				<div class="col-md-3 hidden-xs hidden-sm">
+					<div class="box-filter col-md-12">
+						Filtrar
+					</div>
+					
+					<div class="box-filter col-md-12">
+						<span class="click"><i class="fa fa-search" aria-hidden="true"></i> Opciones de filtrado</span>
+						<span class="arrow"> <i class="fa fa-angle-up" aria-hidden="true"></i> </span>
+						
+						<div class="content">acá contenido</div>
+					</div>
+					
+					<div class="box-filter col-md-12">
+						<span class="click"><i class="fa fa-search" aria-hidden="true"></i> Opciones de filtrado</span>
+						<span class="arrow"> <i class="fa fa-angle-up" aria-hidden="true"></i> </span>
+						
+						<div class="content">acá contenido</div>
+					</div>
 				</div>
 				
-				<div class="col-md-10">
+				<div class="col-md-9 col-xs-12 list">
 					
-					<div class="col-sm-12">
-						<div class="col-sm-4 img">
-							<img src="" />
-							<div id="over-text">text centrado</div>
+					<div class="col-sm-12" ng-repeat="names in names | orderBy:myOrderBy">
+						<div class="col-sm-4">
+							<div class="img" style="background: url('{{names.src}}');">
+								<div id="over-text">text centrado</div>
+							</div>
 						</div>
 						
 						<div class="col-sm-4 description">
-							son 4 rows:
-							title, stars, "cama | solo habitación", 6 iconos
+							<span class="title">{{names.name}}</span>
+							<span class="stars-indicator" ng-bind-html="names.stars">{{names.stars}}</span>
+							<span class="details" ng-bind-html="names.details">{{names.details}}</span>
+							<span ng-bind-html="names.icons">{{names.icons | currency }}</span>
 						</div>
 						
 						<div class="col-sm-4 price">
 							Precio por noche por habitación<br>
 							
-							<span id="precio"><span id="smaller">ARS</span>$1.000</span>
+							<span id="precio"><span id="smaller">ARS</span> ${{names.price}}</span><br>
 							
-							impuestos y tasas no incluidos
-							<a href="#" id="btn">Ver hotel</a>
+							impuestos y tasas no incluidos<br>
+							<a href="#" id="btn">Ver hotel</a><br>
 							
-							<span id="add-txt">Pagá en cuotas</span>
+							<span id="add-txt">Pagá en cuotas</span><br>
 							<span id="add-txt">Pagá en destino</span>
 						</div>
 					</div>
@@ -313,6 +347,26 @@
 
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/functions.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-sanitize.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-sanitize.js"></script>!-->
+	
+	<script src="js/angular_example.js"></script>
+	
+	<script type="text/javascript">
+		$('.box-filter').click(function() {
+		    $("div", this).closest('.box-filter .content').toggle('medium');
+		    icon = $(".arrow", this).find("i");
+			if(icon.hasClass("fa-angle-up")) {
+			  icon.addClass("fa-angle-down").removeClass("fa-angle-up");
+			}else{
+			  icon.addClass("fa-angle-up").removeClass("fa-angle-down");
+			}
+		});
+	</script>
+	
+	
 	
 </body>
 </html>
